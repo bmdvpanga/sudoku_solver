@@ -4,8 +4,11 @@ from django.shortcuts import render
 
 class SudokuSolver:
     def __init__(self, request):
-        self.board = np.empty([9,9])
-
+        self.board = np.empty([9,9], dtype=int)
+        for i in range(9):
+            for j in range(9):
+                key = str(i+1)+str(j+1)
+                self.board[i][j] = request.POST.get(key,'')
     def check_board(self,board, coordinates, value):
         ''' Function takes the column and the row of the board that is validated 
             Parameters:
