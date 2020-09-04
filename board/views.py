@@ -23,11 +23,12 @@ def index(request):
         return render(request, 'board/index.html', board)
 
     if(request.method == 'POST'):
-        print(request.POST)
-        print(request.POST.get('11',''))
+        solver = SudokuSolver(request)
+        
+        print(solver.board)
 
-        ###TODO: Look up QueryDict https://stackoverflow.com/questions/10023213/extracting-items-out-of-a-querydict"
-        # solved_board = utils.solve_board(request)
+        solver.solve_board( solver.board )
+
         return render(request, 'board/index.html', board)
 
 
