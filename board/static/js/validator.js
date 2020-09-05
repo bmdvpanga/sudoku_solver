@@ -2,15 +2,12 @@ function validateForm() {
     let inputs = document.getElementsByClassName("square");
     grid = to2DGrid(inputs)
     let valid = isValidSudoku(grid);
-    console.log(grid);
-    console.log(typeof grid);
+    
     if (!valid) {
         alert("Not a valid Sudoku puzzle! Please enter a valid puzzle and click \'Solve.\'");
         return false;
-    }else{
-        alert("Valid.");
     }
-   
+    
     return true;
 }
 
@@ -37,8 +34,7 @@ function to2DGrid(inputs) {
 function isValidSudoku(grid) {
 
     for (i = 0; i < grid.length; i++) {
-        if (!hasNoDuplicates(grid[i]) /*|| !hasNoDuplicates(getCol(grid, i))*/) {
-            console.log("failing, here")
+        if (!hasNoDuplicates(grid[i]) || !hasNoDuplicates(getCol(grid, i))) {
             return false;
         }
     }
@@ -50,7 +46,6 @@ function isValidSudoku(grid) {
         for (offj = 0; offj <= grid.length - 3; offj += 3) {
 
             if (!hasNoDuplicates(getSubGrid(grid, offi, offj))) {
-                console.log("failing, here too")
                 return false;
             }
         }
@@ -60,7 +55,6 @@ function isValidSudoku(grid) {
 
 function hasNoDuplicates(grid) {
     let set = new Set();
-    console.log(typeof grid[0]);
     for (let i = 0; i < grid.length; i++) {
         //" ", "", "      " all should not be processed
         if (grid[i] !== undefined && grid[i].trim() !== "") {
@@ -83,13 +77,13 @@ function getCol(matrix, col) {
 }
 
 function getSubGrid(grid, offi, offj) {
-    let grid = [];
+    let sub_grid = [];
     for (let i = offi; i < (offi + 3); i++) {
         for (j = offj; j < (offj + 3); j++) {
-            grid.push(grid[i][j]);
+            sub_grid.push(grid[i][j]);
         }
     }
-    return grid;
+    return sub_grid;
 }
 
 /**

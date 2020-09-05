@@ -11,7 +11,7 @@
         {% csrf_token %}
         {% for elements in board %}
                 {% for element in elements %}
-                        <input class="text-center square" value={{element}} size=1 maxlength=1 name={{forloop.parentloop.counter}}{{forloop.counter}}>
+                        <input class="text-center square"  size=1 maxlength=1 name={{forloop.parentloop.counter}}{{forloop.counter}} value={{element}}>
                 {% endfor %}
             <br>
         {% endfor %} 
