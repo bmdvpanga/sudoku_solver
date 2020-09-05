@@ -6,15 +6,15 @@ from .utils import SudokuSolver
 def index(request):
     board = {
       'board':  [
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0]
+            [5,3,' ',' ',7,' ',' ',' ',' '],
+            [6,' ',' ',1,9,5,' ',' ',' '],
+            [' ',9,8,' ',' ',' ',' ',6,' '],
+            [8,' ',' ',' ',6,' ',' ',' ',3],
+            [4,' ',' ',8,' ',3,' ',' ',1],
+            [7,' ',' ',' ',2,' ',' ',' ',6],
+            [' ',6,' ',' ',' ',' ',2,8,' '],
+            [' ',' ',' ',4,1,9,' ',' ',5],
+            [' ',' ',' ',' ',8,' ',' ',7,9]
         ],
         'range': range(9)
     }
@@ -24,10 +24,9 @@ def index(request):
 
     if(request.method == 'POST'):
         solver = SudokuSolver(request)
-        
-        print(solver.board)
 
-        solver.solve_board( solver.board )
+        solved = solver.solve_board( solver.board )
+        board["board"] = solved[1].tolist()
 
         return render(request, 'board/index.html', board)
 

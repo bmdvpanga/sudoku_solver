@@ -6,16 +6,15 @@
         <h1>Sudoku Solver</h1>        
 </div>
 
-<div class="container" align="center">
-       
-    
-    <form action="" method="post" id="grid">
+<div class="container" align="center" onsubmit="return validateForm()">
+    <form action="" method="post">
         {% csrf_token %}
         {% for elements in board %}
                 {% for element in elements %}
-                <input class="text-center" value={{element}} size=1 maxlength=1 name={{forloop.parentloop.counter}}{{forloop.counter}}>
-                {% endfor %}<br>
-        {% endfor %}
+                        <input class="text-center square" value={{element}} size=1 maxlength=1 name={{forloop.parentloop.counter}}{{forloop.counter}}>
+                {% endfor %}
+            <br>
+        {% endfor %} 
         <button type="submit" class="btn btn-dark btn-lg btn-block">Solve</button>
     </form>
 </div>

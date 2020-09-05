@@ -53,8 +53,10 @@ class SudokuSolver:
                         if( self.check_board(board, (row,col), guess) ):
                             board[row][col] = guess
                             #Call the function with the updated board
-                            self.solve_board(board)
+                            if(self.solve_board(board)[0]):
+                                return (True,np.matrix(board))
                             #if we are unable to solve this using the cur value, then we backrack and change position back to 0
                             board[row][col] = 0
-                    return
+                    return (False,np.matrix(board))
         print(np.matrix(board))
+        return (True,np.matrix(board))
