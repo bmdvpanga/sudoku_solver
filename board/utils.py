@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 class SudokuSolver:
     def __init__(self, request):
-        self.board = np.empty([9,9], dtype=int)
+        self.board = [ [" " for _ in range (9)] for _ in range(9) ]
         for i in range(9):
             for j in range(9):
                 key = str(i+1)+str(j+1)
@@ -48,7 +48,7 @@ class SudokuSolver:
         for row in range(0,9):
             for col in range(0,9):
                 #If the current location is empty, then we start brute forcing the guess value
-                if(board[row][col] == 0):
+                if(board[row][col] == ""):
                     for guess in range(1,10):
                         if( self.check_board(board, (row,col), guess) ):
                             board[row][col] = guess
@@ -56,7 +56,7 @@ class SudokuSolver:
                             if(self.solve_board(board)[0]):
                                 return (True,np.matrix(board))
                             #if we are unable to solve this using the cur value, then we backrack and change position back to 0
-                            board[row][col] = 0
+                            board[row][col] = ""
                     return (False,np.matrix(board))
         print(np.matrix(board))
         return (True,np.matrix(board))
