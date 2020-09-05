@@ -1,6 +1,4 @@
-import numpy as np
 from django.shortcuts import render
-
 
 class SudokuSolver:
     def __init__(self, request):
@@ -50,13 +48,13 @@ class SudokuSolver:
                 #If the current location is empty, then we start brute forcing the guess value
                 if(board[row][col] == ""):
                     for guess in range(1,10):
-                        if( self.check_board(board, (row,col), guess) ):
-                            board[row][col] = guess
+                        if( self.check_board(board, (row,col), str(guess)) ):
+                            board[row][col] = str(guess)
                             #Call the function with the updated board
                             if(self.solve_board(board)[0]):
-                                return (True,np.matrix(board))
+                                return (True,self.board)
                             #if we are unable to solve this using the cur value, then we backrack and change position back to 0
                             board[row][col] = ""
-                    return (False,np.matrix(board))
-        print(np.matrix(board))
-        return (True,np.matrix(board))
+                    return (False,self.board)
+        print(self.board)
+        return (True,self.board)

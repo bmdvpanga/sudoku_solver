@@ -26,7 +26,7 @@ def index(request):
         solver = SudokuSolver(request)
 
         solved = solver.solve_board( solver.board )
-        board["board"] = solved[1].tolist()
+        board["board"] = solved[1]
 
         return render(request, 'board/index.html', board)
 
